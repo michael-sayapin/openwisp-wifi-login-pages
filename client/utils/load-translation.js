@@ -1,4 +1,4 @@
-import {addLocale, useLocale} from "ttag";
+import {addLocale, useLocale, t} from "ttag";
 
 const setLocale = (language, translationObj, setLanguage) => {
   setLanguage(language);
@@ -78,6 +78,7 @@ const loadTranslation = async (
   useBrowserLang = false,
   availableLanguages = [],
 ) => {
+  window.translate = undefined;
   try {
     await loadTranslationUtil(
       language,
@@ -87,6 +88,7 @@ const loadTranslation = async (
       useBrowserLang,
       availableLanguages,
     );
+    window.translate = t;
   } catch (err) {
     console.error("Error in loading translations.");
   }
